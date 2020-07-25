@@ -1,5 +1,3 @@
----
-title: "carter - A Simple R Package"
----
+## carter - A Simple R Package
 
 
