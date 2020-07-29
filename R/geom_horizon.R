@@ -62,14 +62,13 @@ StatHorizon <- ggproto(
     if (is.null(params$bandwidth) & is.null(params$bands)) {
 
       message('Using default of 3 bands')
-      params$bandwidth <- diff(range(data$y)) / 3
+      params$bandwidth <- diff(range(data$y, na.rm = TRUE)) / 3
 
     } else if (is.null(params$bandwidth)) {
 
-      params$bandwidth <- diff(range(data$y)) / params$bands
+      params$bandwidth <- diff(range(data$y, na.rm = TRUE)) / params$bands
 
     }
-
 
     params$n_min_y <- min(data$y, na.rm = TRUE)
 
