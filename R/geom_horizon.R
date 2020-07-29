@@ -77,7 +77,7 @@ StatHorizon <- ggproto(
 
   },
 
-  compute_group = function(data, scales, bandwidth, n_min_y) {
+  compute_group = function(data, scales, bandwidth, bands, n_min_y) {
 
     # calculating the band in which the values fall
     data$fillb <- ((data$y - n_min_y) %/% bandwidth) + 1
