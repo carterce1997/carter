@@ -1,4 +1,5 @@
 
+library(ggplot2)
 
 #' A simple ggplot theme.
 theme_carter <- function() {
