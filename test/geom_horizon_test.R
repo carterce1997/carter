@@ -1,6 +1,8 @@
 
 library(tidyverse)
 
+devtools::load_all()
+
 data("EuStockMarkets")
 
 df <-
@@ -14,4 +16,5 @@ df$value[sample(1:nrow(df))[1:10]] <- NA
 df %>%
   ggplot() +
   geom_horizon(aes(x = time, y = value), bands = 2) +
-  facet_grid(ticker ~ .)
+  facet_grid(ticker ~ .) +
+  theme_carter()
