@@ -1,6 +1,4 @@
 
-library(ggplot2)
-
 geom_horizon <-  function(mapping = NULL, data = NULL, show.legend = TRUE, inherit.aes = TRUE, na.rm = TRUE, bandwidth = NULL, ...) {
 
   list(
