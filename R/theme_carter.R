@@ -7,7 +7,7 @@ theme_carter <- function() {
   theme_minimal() +
     theme(
       text = element_text(family = 'Helvetica Neue'),
-      panel.grid = element_blank()
+      panel.grid.minor = element_blank()
     )
 
 }

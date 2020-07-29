@@ -1,7 +1,7 @@
 
 library(ggplot2)
 
-geom_horizon <-  function(mapping = NULL, data = NULL, show.legend = TRUE, inherit.aes = TRUE, na.rm = TRUE, bandwidth = NULL, ...) {
+geom_horizon <-  function(mapping = NULL, data = NULL, show.legend = TRUE, inherit.aes = TRUE, na.rm = TRUE, bands = NULL, bandwidth = NULL, ...) {
 
   list(
     layer(
@@ -12,7 +12,7 @@ geom_horizon <-  function(mapping = NULL, data = NULL, show.legend = TRUE, inher
       position = 'identity',
       show.legend = show.legend,
       inherit.aes = inherit.aes,
-      params = list(bandwidth = bandwidth, na.rm = na.rm, ...)
+      params = list(bandwidth = bandwidth, bands = bands, na.rm = na.rm, ...)
     )
   )
 
@@ -31,7 +31,7 @@ GeomHorizon <- ggproto(
 )
 
 
-stat_horizon <- function(mapping = NULL, data = NULL, geom = "horizon", show.legend = TRUE, inherit.aes = TRUE, na.rm = TRUE, bandwidth = NULL, ...) {
+stat_horizon <- function(mapping = NULL, data = NULL, geom = "horizon", show.legend = TRUE, inherit.aes = TRUE, na.rm = TRUE, bandwidth = NULL, bands = NULL, ...) {
 
   list(
     layer(
@@ -42,7 +42,7 @@ stat_horizon <- function(mapping = NULL, data = NULL, geom = "horizon", show.leg
       position = 'identity',
       show.legend = show.legend,
       inherit.aes = inherit.aes,
-      params = list(bandwidth = bandwidth, na.rm = na.rm, ...)
+      params = list(bandwidth = bandwidth, bands = bands, na.rm = na.rm, ...)
     )
   )
 
@@ -59,10 +59,17 @@ StatHorizon <- ggproto(
   setup_params = function(data, params) {
 
     # calculating a default bandwidth
-    if (is.null(params$bandwidth)) {
-      params$bandwidth <- diff(range(data$y)) / 4
-      message(sprintf("bandwidth not specified. Using computed bandwidth %s", params$bandwidth))
+    if (is.null(params$bandwidth) & is.null(params$bands)) {
+
+      message('Using default of 3 bands')
+      params$bandwidth <- diff(range(data$y)) / 3
+
+    } else if (is.null(params$bandwidth)) {
+
+      params$bandwidth <- diff(range(data$y)) / params$bands
+
     }
+
 
     params$n_min_y <- min(data$y, na.rm = TRUE)
 
