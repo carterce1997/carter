@@ -6,7 +6,7 @@ m <- function(msg, header = NULL, log_file = NULL) {
 
   current_time <- Sys.time()
 
-  if (!is.null(logfile)) {
+  if (!is.null(log_file)) {
     logger <- logger(appenders = file_appender(log_file))
     info(logger, msg)
   }
