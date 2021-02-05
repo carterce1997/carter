@@ -1,14 +1,22 @@
 
 library(glue)
+library(log4r)
 
-m <- function(msg, header = NULL) {
+m <- function(msg, header = NULL, log_file = NULL) {
+
+  current_time <- Sys.time()
+
+  if (!is.null(logfile)) {
+    logger <- logger(appenders = file_appender(log_file))
+    info(logger, msg)
+  }
 
   if (is.null(header))
     formatted <-
-      glue::glue('[ {Sys.time()} ] {msg}\n\n')
+      glue('[ {current_time} ] {msg}\n\n')
   else
     formatted <-
-      glue::glue('[ {header} {Sys.time()} ] {msg}\n\n')
+      glue('[ {header} {current_time} ] {msg}\n\n')
 
   cat(formatted)
 
