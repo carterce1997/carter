@@ -13,10 +13,10 @@ m <- function(msg, header = NULL, log_file = NULL) {
 
   if (is.null(header))
     formatted <-
-      glue('[ {current_time} ] {msg}\n\n')
+      glue::glue('[ {current_time} ] {msg}\n\n')
   else
     formatted <-
-      glue('[ {header} {current_time} ] {msg}\n\n')
+      glue::glue('[ {header} {current_time} ] {msg}\n\n')
 
   cat(formatted)
 
